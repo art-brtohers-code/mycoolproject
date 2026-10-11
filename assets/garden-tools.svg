@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <symbol id="book" viewBox="0 0 32 32"><path fill="currentColor" d="M3 5 14 7v21L3 25ZM18 7l11-2v20l-11 3Z"/><path d="m7 11 4 1m-4 5 4 1m12-6 3-1m-3 7 3-1M16 6v23" fill="none" stroke="currentColor" stroke-width="2"/><path d="M5 7v16l7 2V9Zm15 2v16l7-2V7Z" fill="#fff7df"/><path d="m7 12 3 1m-3 4 3 1m12-5 3-1m-3 6 3-1" fill="none" stroke="currentColor" stroke-width="1.5"/></symbol>
+  <symbol id="tools" viewBox="0 0 32 32"><path d="m7 28 15-18M17 4l3 3 3-4 3 3-4 3 3 3M25 28 8 10M4 3l2 1 6 6-3 3-5-7Z" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="leaf" viewBox="0 0 32 32"><path d="M4 28C1 13 8 4 28 3c-1 17-8 25-22 24Z" fill="currentColor"/><path d="m5 27 16-17M10 21l-1-9m7 3 8-1" fill="none" stroke="#fff7df" stroke-width="1.4" stroke-linecap="round"/></symbol>
+</svg>
