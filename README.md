@@ -8,6 +8,4 @@ The page uses plain HTML, CSS, and JavaScript. The game graphics are drawn with 
 
 Open `index.html` in a browser to play locally. No install or build step is needed.
 
-Run the tests with `node --test tests/*.test.js`.
-
 [Play online](https://art-brtohers-code.github.io/mycoolproject/)
