@@ -3,178 +3,154 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#efe5c8">
-  <meta name="description" content="Two games. One garden. Grow your snake or spend the night chasing ghosts in a custom Pac-Man maze. Plot Twist, the garden arcade.">
-  <title>Plot Twist — the garden arcade</title>
+  <meta name="description" content="A small browser game with Snake and Pac-Man.">
+  <title>Plot Twist</title>
   <link rel="icon" href="data:,">
-  <link rel="preload" href="assets/plot-twist-wordmark.png" as="image">
-  <link rel="stylesheet" href="style.css?v=6">
+  <link rel="stylesheet" href="style.css?v=8">
   <script src="engine.js?v=3" defer></script>
   <script src="pacman-engine.js?v=1" defer></script>
-  <script src="wardrobe.js?v=1" defer></script>
+  <script src="wardrobe.js?v=8" defer></script>
   <script src="storage.js?v=6" defer></script>
-  <script src="renderer.js?v=5" defer></script>
-  <script src="pacman-renderer.js?v=1" defer></script>
-  <script src="game.js?v=6" defer></script>
+  <script src="renderer.js?v=8" defer></script>
+  <script src="pacman-renderer.js?v=8" defer></script>
+  <script src="game.js?v=8" defer></script>
 </head>
 <body>
   <main class="page">
-    <header class="edition-line">
-      <span class="edition-brand">The garden arcade <span class="edition-divider" aria-hidden="true">/</span> <span class="edition-volume">Vol. 01</span></span>
-      <span id="edition-date">Freshly picked, daily</span>
+    <header class="page-header">
+      <div><h1>Plot Twist</h1><p>Snake and Pac-Man</p></div>
       <nav class="desk-tools" aria-label="Game tools">
-        <button id="hats-button" type="button" aria-haspopup="dialog"><canvas id="nav-hat" width="72" height="72" aria-hidden="true"></canvas>Hats <span id="nav-hat-count">1/8</span></button>
-        <button id="help-button" type="button"><svg aria-hidden="true"><use href="assets/garden-tools.svg#book"></use></svg>Field guide</button>
-        <button id="settings-button" type="button"><svg aria-hidden="true"><use href="assets/garden-tools.svg#tools"></use></svg>Settings</button>
+        <button id="hats-button" type="button" aria-haspopup="dialog">Hats <span id="nav-hat-count">1/8</span></button>
+        <button id="help-button" type="button">How to play</button>
+        <button id="settings-button" type="button">Settings</button>
       </nav>
     </header>
-    <section class="arcade-selector" aria-label="Choose your game">
-      <div class="arcade-intro"><span class="eyebrow">Two games. One garden.</span><strong>Pick your appetite.</strong></div>
-      <div id="game-picker" class="game-picker" role="group" aria-label="Game">
-        <button type="button" data-game="snake" aria-pressed="true"><canvas id="snake-game-art" width="180" height="110" aria-hidden="true"></canvas><span><strong>Snake</strong><small>A growing appetite</small></span><span class="game-badge" aria-hidden="true">01</span></button>
-        <button type="button" data-game="pacman" aria-pressed="false"><canvas id="pacman-game-art" width="180" height="110" aria-hidden="true"></canvas><span><strong>Pac-Man</strong><small>The moon garden</small></span><span class="game-badge" aria-hidden="true">02</span></button>
-      </div>
-      <p id="game-switch-note">Switch any time. Your other game waits, paused.</p>
-    </section>
+    <div id="game-picker" class="game-picker" role="group" aria-label="Game">
+      <button type="button" data-game="snake" aria-pressed="true">Snake</button>
+      <button type="button" data-game="pacman" aria-pressed="false">Pac-Man</button>
+    </div>
     <div class="game-layout">
-      <section class="brand-poster" aria-label="Plot Twist, a garden snake game">
-        <p class="poster-eyebrow">Locally grown. Dangerously moreish.</p>
-        <h1><span class="sr-only">Plot Twist</span><img class="wordmark" src="assets/plot-twist-wordmark.png" width="1254" height="1254" alt="" fetchpriority="high"></h1>
-        <p class="poster-description">A garden snake game</p>
-        <img class="poster-art" src="assets/garden-mascot.png" width="1024" height="1536" alt="An olive-green snake wrapped around an enormous tomato, with radishes and leaves at its tail." decoding="async">
-        <p class="poster-motto">A little appetite.<br>A lot of trouble.</p>
-        <p class="poster-footnote">No coins. Just good turns.</p>
-      </section>
       <section class="play-area" aria-label="Game">
         <div class="score-strip">
-          <div class="score-main"><span id="score-label" class="eyebrow">Your harvest</span><span id="score" class="score-number">000</span></div>
-          <div class="chain-stat"><span id="chain-label" class="eyebrow">Your rhythm</span><span id="combo-value">×1</span><canvas id="pacman-lives" class="pacman-only" width="155" height="40" role="img" aria-label="3 lives remaining"></canvas><div class="chain-track"><div id="combo-fill"></div></div></div>
-          <div class="best-stat"><span id="best-label" class="eyebrow">Personal best</span><span id="best">000</span></div>
+          <div><span id="score-label" class="eyebrow">Score</span><span id="score" class="score-number">0</span></div>
+          <div><span id="chain-label" class="eyebrow">Multiplier</span><span id="combo-value">x1</span><span id="pacman-lives" class="pacman-only">3</span></div>
+          <div><span id="best-label" class="eyebrow">Best</span><span id="best">0</span></div>
         </div>
-        <div class="field-heading"><span id="field-name">01 / The allotment</span><button id="pause" type="button" disabled>Pause <kbd>P</kbd></button></div>
+        <div class="field-heading"><span id="field-name">Allotment</span><button id="pause" type="button" disabled>Pause <kbd>P</kbd></button></div>
         <div class="board" id="board">
-          <canvas id="game" width="720" height="720" tabindex="0" aria-label="Garden game field. Use arrow keys or W A S D to steer." aria-describedby="controls-hint"></canvas>
+          <canvas id="game" width="600" height="600" tabindex="0" aria-label="Game board. Use arrow keys or W A S D to move." aria-describedby="controls-hint"></canvas>
           <section id="board-screen" class="board-screen" aria-label="Start a run">
             <div class="screen-card">
-              <p class="screen-serial" aria-hidden="true">The garden is open</p>
-              <p id="screen-kicker" class="eyebrow">Come on in, hungry snake</p>
-              <h2 id="screen-title">Lettuce<br>begin.</h2>
-              <p id="screen-copy">Collect the crops on your ticket.<br>Leave yourself a way out.</p>
+              <p id="screen-kicker">Snake</p>
+              <h2 id="screen-title">Ready?</h2>
+              <p id="screen-copy">Collect food and avoid the walls.</p>
               <dl id="receipt" class="receipt" hidden></dl>
               <button id="run-rewards" type="button" class="run-rewards" hidden aria-haspopup="dialog"></button>
-              <button id="primary-action" type="button" class="button-primary">Let’s play</button>
+              <button id="primary-action" type="button" class="button-primary">Start</button>
               <div class="screen-options">
-                <button id="restart-run" type="button" class="button-text" hidden>Restart run</button>
-                <button id="secondary-action" type="button" class="button-text" hidden>Back to the garden</button>
+                <button id="restart-run" type="button" hidden>Restart</button>
+                <button id="secondary-action" type="button" hidden>Back</button>
               </div>
-              <p id="screen-hint" class="screen-hint">or press Space to dig in</p>
-              <p class="screen-admission" aria-hidden="true">Admit one hungry snake</p>
+              <p id="screen-hint" class="screen-hint">Press Space to start</p>
             </div>
           </section>
-          <div id="delivery-stamp" class="delivery-stamp" hidden>Delivered!<small>+10 points</small></div>
+          <div id="delivery-stamp" class="delivery-stamp" hidden>Order complete!<small>+10 points</small></div>
         </div>
-        <div class="field-caption"><span id="field-status">Mind the walls. Follow your appetite.</span><span id="run-time">00:00</span></div>
+        <div class="field-caption"><span id="field-status">Avoid the walls and your tail.</span><span id="run-time">00:00</span></div>
         <div id="touch-controls" class="touch-controls" aria-label="Directional controls">
-          <button type="button" data-direction="up" aria-label="Turn up">↑</button>
-          <button type="button" data-direction="left" aria-label="Turn left">←</button>
-          <button type="button" data-direction="down" aria-label="Turn down">↓</button>
-          <button type="button" data-direction="right" aria-label="Turn right">→</button>
+          <button type="button" data-direction="up" aria-label="Turn up">Up</button>
+          <button type="button" data-direction="left" aria-label="Turn left">Left</button>
+          <button type="button" data-direction="down" aria-label="Turn down">Down</button>
+          <button type="button" data-direction="right" aria-label="Turn right">Right</button>
         </div>
-        <p id="controls-hint" class="controls-hint"><span>Steer <kbd>↑</kbd><kbd>←</kbd><kbd>↓</kbd><kbd>→</kbd> <span class="wasd-hint">or <kbd>W A S D</kbd></span></span><span>Pause <kbd>Space</kbd></span></p>
+        <p id="controls-hint" class="controls-hint">Move with arrow keys or WASD.<br>Pause with Space or P.</p>
       </section>
-      <aside class="garden-desk" aria-label="Harvest and game options">
-        <section id="order-ticket" class="order-ticket" aria-labelledby="order-title">
-          <div class="ticket-top"><span class="eyebrow">Market order</span><span id="order-number">No. 001</span></div>
-          <h2 id="order-title">For the kitchen.</h2>
-          <p id="order-description" class="ticket-description">Fresh from your little patch.</p>
-          <div id="order-items" class="order-items"></div>
-          <div class="ticket-total"><span id="order-reward-label">Delivery bonus</span><strong id="order-reward">+10 pts</strong></div>
-          <p id="order-note" class="ticket-note">Look for the little marks around needed crops.</p>
+      <aside class="garden-desk" aria-label="Game options">
+        <section id="order-ticket" aria-labelledby="order-title">
+          <div class="ticket-top"><span class="eyebrow">Order</span><span id="order-number">1</span></div>
+          <h2 id="order-title">Collect these</h2>
+          <p id="order-description" class="ticket-description">Fill the order for extra points.</p>
+          <div id="order-items"></div>
+          <div class="ticket-total"><span id="order-reward-label">Bonus</span><strong id="order-reward">+10 pts</strong></div>
+          <p id="order-note" class="ticket-note">Needed food has an outline.</p>
         </section>
-        <section class="hat-nook snake-only" aria-labelledby="hat-nook-title">
-          <button id="wardrobe-button" type="button" class="wardrobe-invite" aria-haspopup="dialog">
-            <canvas id="desk-snake" width="240" height="180" aria-hidden="true"></canvas>
-            <span><span id="hat-nook-title" class="eyebrow">The potting shed</span><strong id="equipped-name">Little sprout</strong><span class="wardrobe-link">Pick a hat <span aria-hidden="true">↗</span></span></span>
-          </button>
-          <div class="next-hat"><span id="next-hat-label">Next: Sunday straw</span><span id="next-hat-count">0 / 10 crops</span></div>
-          <div id="next-hat-progress" class="hat-progress" role="progressbar" aria-label="Next hat milestone" aria-valuemin="0" aria-valuemax="10" aria-valuenow="0"><span></span></div>
-        </section>
-        <section id="night-watch" class="night-watch pacman-only" aria-labelledby="night-watch-title">
-          <div class="section-label"><h2 id="night-watch-title">The night watch</h2><span class="eyebrow">Meet the locals</span></div>
-          <div class="ghost-roster">
-            <div><canvas data-ghost="0" width="90" height="90" aria-hidden="true"></canvas><span><strong>Pip</strong><small>Follows your footsteps</small></span></div>
-            <div><canvas data-ghost="1" width="90" height="90" aria-hidden="true"></canvas><span><strong>Moth</strong><small>Waits around the next bend</small></span></div>
-            <div><canvas data-ghost="2" width="90" height="90" aria-hidden="true"></canvas><span><strong>Plum</strong><small>Takes the scenic route</small></span></div>
-            <div><canvas data-ghost="3" width="90" height="90" aria-hidden="true"></canvas><span><strong>Marigold</strong><small>Brave until you get close</small></span></div>
-          </div>
-          <p class="night-watch-note">Light a flower lantern to turn the chase around. Catch ghosts for 200, 400, 800, then 1,600 points.</p>
-        </section>
-        <section class="maze-legend pacman-only" aria-label="Maze legend">
-          <div><span class="legend-dot" aria-hidden="true"></span><span>A little bite<small>10 points</small></span></div>
-          <div><canvas id="lantern-legend" width="64" height="64" aria-hidden="true"></canvas><span>Flower lantern<small>50 points + ghost power</small></span></div>
-          <p>Side paths join across the garden.<br>Clear every pellet to start a new night.</p>
-        </section>
-        <div class="mode-section snake-only">
-          <div class="section-label"><h2>The menu</h2><span class="eyebrow">Pick your pleasure</span></div>
+        <section class="snake-only">
+          <h2>Mode</h2>
           <div id="mode-picker" class="mode-picker" role="group" aria-label="Game mode">
-            <button type="button" data-mode="harvest" aria-pressed="true"><canvas class="mode-art" data-art="tomato" width="90" height="90" aria-hidden="true"></canvas><span class="mode-name">Harvest<small>Fill your basket</small></span><span class="mode-dot" aria-hidden="true"></span></button>
-            <button type="button" data-mode="daily" aria-pressed="false"><canvas class="mode-art" data-art="golden" width="90" height="90" aria-hidden="true"></canvas><span class="mode-name">Daily plot<small>A fresh daily challenge</small></span><span class="mode-dot" aria-hidden="true"></span></button>
-            <button type="button" data-mode="endless" aria-pressed="false"><canvas class="mode-art" data-art="pumpkin" width="90" height="90" aria-hidden="true"></canvas><span class="mode-name">Endless<small>Eyes on the high score</small></span><span class="mode-dot" aria-hidden="true"></span></button>
-            <button type="button" data-mode="practice" aria-pressed="false"><canvas class="mode-art" data-art="carrot" width="90" height="90" aria-hidden="true"></canvas><span class="mode-name">Practice<small>Room to find your feet</small></span><span class="mode-dot" aria-hidden="true"></span></button>
+            <button type="button" data-mode="harvest" aria-pressed="true">Harvest</button>
+            <button type="button" data-mode="daily" aria-pressed="false">Daily</button>
+            <button type="button" data-mode="endless" aria-pressed="false">Endless</button>
+            <button type="button" data-mode="practice" aria-pressed="false">Practice</button>
           </div>
-          <p id="mode-note" class="mode-note">Three crops. One order. Find your own route.</p>
-        </div>
+          <p id="mode-note" class="mode-note">Collect food to fill orders.</p>
+        </section>
         <div class="plot-section snake-only">
-          <label for="plot" class="eyebrow">Choose a patch</label>
-          <select id="plot"><option value="allotment">01 — The allotment</option><option value="orchard">02 — The orchard</option><option value="greenhouse">03 — The greenhouse</option></select>
-          <p id="plot-note" class="plot-note">Room to find your feet.</p>
+          <label for="plot">Map</label>
+          <select id="plot"><option value="allotment">Allotment</option><option value="orchard">Orchard</option><option value="greenhouse">Greenhouse</option></select>
+          <p id="plot-note" class="plot-note">An open map.</p>
         </div>
-        <div class="desk-bottom"><strong id="delivery-count">00</strong><span id="desk-count-label">baskets delivered<br><small>A good day’s work.</small></span></div>
+        <section class="hat-nook snake-only">
+          <h2>Hats</h2>
+          <button id="wardrobe-button" type="button" class="wardrobe-invite" aria-haspopup="dialog">
+            <span><strong id="equipped-name">Sprout</strong><span class="wardrobe-link">Change hat</span></span>
+          </button>
+          <div class="next-hat"><span id="next-hat-label">Next hat</span><span id="next-hat-count">0 / 10</span></div>
+        </section>
+        <section class="maze-legend pacman-only" aria-label="Pac-Man rules">
+          <h2>How it works</h2>
+          <p>Small dot = 10 points.<br>Big dot = 50 points and ghost power.</p>
+          <p>Eat every dot to clear the level. Avoid ghosts unless they turn blue.</p>
+          <p>The side tunnels connect.</p>
+        </section>
+        <div class="desk-bottom"><strong id="delivery-count">0</strong> <span id="desk-count-label">orders completed</span></div>
       </aside>
     </div>
-    <footer class="page-footer"><span class="footer-motto">Grown for the joy of it.</span><div><button id="sound-button" type="button" aria-pressed="false">Sound on</button><span class="footer-rule" aria-hidden="true"></span><span id="record-note">Best scores stay in this browser.</span></div></footer>
-    <p id="asset-message" class="asset-message" hidden></p>
+    <footer class="page-footer"><span id="record-note">Best scores are saved in this browser.</span><button id="sound-button" type="button" aria-pressed="false">Sound on</button></footer>
     <p id="announcer" class="sr-only" aria-live="polite" aria-atomic="true"></p>
-    <button id="hat-toast" class="hat-toast" type="button" hidden aria-haspopup="dialog"><canvas id="toast-hat" width="120" height="120" aria-hidden="true"></canvas><span><small>A little something for your head</small><strong id="toast-name"></strong><span>Hat unlocked · visit the shed <span aria-hidden="true">↗</span></span></span></button>
-    <noscript><p>This garden needs JavaScript enabled to grow.</p></noscript>
+    <button id="hat-toast" class="hat-toast" type="button" hidden aria-haspopup="dialog"><span><small>Hat unlocked</small><strong id="toast-name"></strong><span>Click to try it on</span></span></button>
+    <noscript><p>Enable JavaScript to play.</p></noscript>
   </main>
-  <dialog id="wardrobe-dialog" class="paper-dialog wardrobe-dialog" aria-labelledby="wardrobe-title" aria-describedby="wardrobe-copy">
-    <form method="dialog"><button class="dialog-close" aria-label="Close hat collection">Close <span aria-hidden="true">×</span></button></form>
-    <p class="eyebrow">The potting shed / <span id="wardrobe-count">1 of 8 collected</span></p>
-    <h2 id="wardrobe-title">Good growing.<br>Great headwear.</h2>
-    <p id="wardrobe-copy" class="wardrobe-copy">A souvenir for every milestone. Practice counts, too.</p>
-    <div class="fitting-room">
-      <canvas id="hat-preview" width="480" height="320" role="img" aria-label="Your snake wearing Little sprout"></canvas>
-      <div><span class="eyebrow">On your snake</span><h3 id="preview-name">Little sprout</h3><p id="preview-note">Every gardener starts somewhere.</p><button id="remove-hat" type="button" class="button-text" aria-pressed="false">Go bareheaded</button><p id="wardrobe-feedback" class="wardrobe-feedback" role="status" aria-live="polite"></p></div>
-    </div>
+  <dialog id="wardrobe-dialog" class="paper-dialog" aria-labelledby="wardrobe-title" aria-describedby="wardrobe-copy">
+    <form method="dialog"><button class="dialog-close" aria-label="Close hat collection">Close</button></form>
+    <h2 id="wardrobe-title">Snake hats</h2>
+    <p id="wardrobe-count">1 of 8 collected</p>
+    <p id="wardrobe-copy" class="wardrobe-copy">Unlock hats by playing. Practice counts too.</p>
+    <button id="remove-hat" type="button" aria-pressed="false">No hat</button>
+    <p id="wardrobe-feedback" role="status" aria-live="polite"></p>
     <div id="hat-collection" class="hat-collection" role="group" aria-label="Collectible hats"></div>
-    <p class="wardrobe-footnote">Hats are cosmetic. Your collection stays in this browser.<br>Opening the shed pauses your run. Close it, then resume when you’re ready.</p>
-    <form method="dialog"><button class="button-primary">Back to the garden</button></form>
+    <p class="wardrobe-footnote">Hats do not affect gameplay. Your collection is saved in this browser.</p>
   </dialog>
   <dialog id="settings-dialog" class="paper-dialog" aria-labelledby="settings-title">
     <form method="dialog"><button class="dialog-close" aria-label="Close settings">Close</button></form>
-    <p class="eyebrow">A few creature comforts</p><h2 id="settings-title">Your garden.<br>Your rules.</h2>
-    <label class="setting-row" for="volume"><span>Sound volume</span><output id="volume-value">35%</output></label>
+    <h2 id="settings-title">Settings</h2>
+    <label class="setting-row" for="volume">Volume <output id="volume-value">35%</output></label>
     <input id="volume" type="range" min="0" max="100" step="5" value="35">
-    <label class="setting-row checkbox-row snake-only"><span>Show the field grid<small>A little help lining up your turns.</small></span><input id="show-grid" type="checkbox" checked></label>
-    <label class="setting-row checkbox-row"><span>Gentle motion<small>Less movement, no bursts or screen shake.</small></span><input id="gentle-motion" type="checkbox"></label>
-    <label class="setting-row checkbox-row"><span>Direction buttons<small>Show controls below the field.</small></span><input id="show-controls" type="checkbox"></label>
-    <label for="snake-pattern" class="setting-row snake-only"><span>Your snake’s coat</span></label>
-    <select id="snake-pattern" class="snake-only"><option value="ribbon">The original ribbon</option><option value="speckled" disabled>Seed freckles — collect 25 crops</option><option value="banded" disabled>Garden bands — deliver 5 orders in one run</option></select>
-    <p id="collection-note" class="dialog-note snake-only">A little wardrobe, earned in the garden.</p>
+    <label class="setting-row snake-only">Show grid <input id="show-grid" type="checkbox" checked></label>
+    <label class="setting-row">Reduce animation <input id="gentle-motion" type="checkbox"></label>
+    <label class="setting-row">Show direction buttons <input id="show-controls" type="checkbox"></label>
+    <label for="snake-pattern" class="setting-row snake-only">Snake pattern</label>
+    <select id="snake-pattern" class="snake-only"><option value="ribbon">Plain</option><option value="speckled" disabled>Dots - collect 25 crops</option><option value="banded" disabled>Stripes - complete 5 orders in one run</option></select>
+    <p id="collection-note" class="dialog-note snake-only"></p>
     <p id="legacy-best" class="dialog-note" hidden></p>
-    <form method="dialog"><button class="button-primary">Back to the garden</button></form>
   </dialog>
   <dialog id="help-dialog" class="paper-dialog" aria-labelledby="help-title">
     <form method="dialog"><button class="dialog-close" aria-label="Close instructions">Close</button></form>
-    <p class="eyebrow">The field guide / No. 01</p><h2 id="help-title">A few<br>good turns.</h2>
-    <ol class="instructions snake-only"><li><strong>Follow your appetite.</strong> Use the arrow keys, WASD, or swipe the field. Each crop makes you longer.</li><li><strong>Fill the ticket.</strong> Marked crops count toward your order. A full basket earns 10 extra points.</li><li><strong>Find a rhythm.</strong> Pick crops in quick succession to build a multiplier, up to ×5. A golden beet is worth 5 extra points.</li><li><strong>Leave yourself room.</strong> Avoid the edges, your tail, and stones. An outlined warning appears before a new stone settles.</li></ol>
-    <ol class="instructions pacman-only"><li><strong>Take the night shift.</strong> Use arrows, WASD, swipes, or direction buttons. You move continuously. Request a turn before the junction and it happens as soon as the path opens.</li><li><strong>Clear your plate.</strong> Eat every pellet to clear the maze, earn 500 bonus points, and begin a faster night in a new ink palette. Small pellets earn 10 points; flower lanterns earn 50.</li><li><strong>Turn the chase around.</strong> Lanterns temporarily make ghosts edible. Catch them for 200, 400, 800, then 1,600 points. Their eyes return to the glasshouse.</li><li><strong>Make yourself scarce.</strong> The two side paths connect. You have three lives; a ghost costs one. Earn an extra life every 10,000 points. Fruit appears twice each night and lasts 12 seconds.</li></ol>
-    <p class="dialog-note snake-only">Daily plots reset at midnight UTC. Everyone gets the same seed and rules; your choices shape the run. Practice has a slower pace, no stones, and no records.</p>
-    <p class="dialog-note">Space or P pauses. M toggles sound. Switching tabs pauses the game automatically.</p>
-    <p class="dialog-note">Switch between Snake and Pac-Man above the game. Your other run stays paused until you return and resume it. Each game keeps its own personal best.</p>
-    <p class="dialog-note snake-only">Visit Hats to collect eight garden hats for Snake. Pick crops, deliver baskets, reach a ×5 rhythm, or score 100 points to earn them. All Snake modes count, including Practice.</p>
-    <form method="dialog"><button class="button-primary">Got it. Let’s grow.</button></form>
+    <h2 id="help-title">How to play</h2>
+    <ol class="instructions snake-only">
+      <li>Use the arrow keys, WASD, or swipe to move. Food makes the snake longer.</li>
+      <li>Collect the outlined food to fill an order and earn 10 extra points.</li>
+      <li>Collect food quickly to build a multiplier up to x5. Gold food gives 5 extra points.</li>
+      <li>Avoid walls, your tail, and rocks. A red outline shows where a new rock will appear.</li>
+    </ol>
+    <ol class="instructions pacman-only">
+      <li>Use the arrow keys, WASD, or swipe. You can request a turn before reaching a corner.</li>
+      <li>Eat all the dots to clear the maze and earn 500 extra points. Small dots give 10 points; big dots give 50.</li>
+      <li>Big dots turn ghosts blue for a short time. Catch blue ghosts for 200, 400, 800, then 1,600 points.</li>
+      <li>You start with three lives. The side tunnels connect. Every 10,000 points earns an extra life.</li>
+    </ol>
+    <p class="dialog-note snake-only">Daily uses the same map each day and resets at midnight UTC. Practice is slower, has no rocks, and does not save a best score.</p>
+    <p class="dialog-note">Space or P pauses. M toggles sound. Switching games or tabs pauses your run.</p>
+    <p class="dialog-note snake-only">Open Hats to see what you have unlocked.</p>
   </dialog>
 </body>
 </html>

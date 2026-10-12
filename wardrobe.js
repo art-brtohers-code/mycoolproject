@@ -5,14 +5,14 @@
 })(typeof globalThis !== "undefined" ? globalThis : this, function () {
   "use strict";
   const HATS = Object.freeze([
-    { id: "sprout", name: "Little sprout", note: "Every gardener starts somewhere.", metric: "lifetimeCrops", target: 0, goal: "A welcome gift", unit: "crops", tile: 0 },
-    { id: "straw", name: "Sunday straw", note: "Made for a long lunch outside.", metric: "lifetimeCrops", target: 10, goal: "Pick 10 crops in total", unit: "crops", tile: 1 },
-    { id: "tomato", name: "Tomato beret", note: "Very ripe. Very continental.", metric: "lifetimeCrops", target: 25, goal: "Pick 25 crops in total", unit: "crops", tile: 2 },
-    { id: "chef", name: "Yes, chef!", note: "Compliments to the gardener.", metric: "totalOrders", target: 1, goal: "Deliver your first basket", unit: "baskets", tile: 3 },
-    { id: "mushroom", name: "Fun guy", note: "A little shade for your greens.", metric: "lifetimeCrops", target: 75, goal: "Pick 75 crops in total", unit: "crops", tile: 4 },
-    { id: "beekeeper", name: "Busy bee", note: "The market’s most regular regular.", metric: "totalOrders", target: 10, goal: "Deliver 10 baskets in total", unit: "baskets", tile: 5 },
-    { id: "wizard", name: "Garden wizard", note: "A few turns ahead of the rest.", metric: "bestCombo", target: 5, goal: "Reach a ×5 rhythm in one run", unit: "rhythm", tile: 6 },
-    { id: "crown", name: "Crop royalty", note: "All hail the head of the cabbage.", metric: "bestScore", target: 100, goal: "Score 100 points in one run", unit: "points", tile: 7 },
+    { id: "sprout", name: "Sprout", metric: "lifetimeCrops", target: 0, goal: "Unlocked from the start", unit: "crops" },
+    { id: "straw", name: "Straw hat", metric: "lifetimeCrops", target: 10, goal: "Pick 10 crops in total", unit: "crops" },
+    { id: "tomato", name: "Tomato hat", metric: "lifetimeCrops", target: 25, goal: "Pick 25 crops in total", unit: "crops" },
+    { id: "chef", name: "Chef hat", metric: "totalOrders", target: 1, goal: "Deliver your first basket", unit: "baskets" },
+    { id: "mushroom", name: "Mushroom hat", metric: "lifetimeCrops", target: 75, goal: "Pick 75 crops in total", unit: "crops" },
+    { id: "beekeeper", name: "Bee hat", metric: "totalOrders", target: 10, goal: "Deliver 10 baskets in total", unit: "baskets" },
+    { id: "wizard", name: "Wizard hat", metric: "bestCombo", target: 5, goal: "Reach a x5 multiplier in one run", unit: "rhythm" },
+    { id: "crown", name: "Crown", metric: "bestScore", target: 100, goal: "Score 100 points in one run", unit: "points" },
   ].map(Object.freeze));
   const safeCount = (value) => Number.isSafeInteger(value) && value >= 0 ? value : 0;
   const unlocked = (data, hat) => safeCount(data[hat.metric]) >= hat.target;

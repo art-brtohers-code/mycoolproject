@@ -1,5 +1,13 @@
 # Plot Twist
 
-A small garden-themed arcade I put together with two games in it. In Snake you wind your way around a vegetable patch, fill market orders and unlock some silly hats along the way. Pac-Man moves the action to a moonlit hedge maze where four garden ghosts chase you between the flower lanterns. Everything runs in the browser with nothing to install, and you can play with the arrow keys, WASD or swipes on your phone.
+Two small browser games: Snake and Pac-Man. Use the arrow keys, WASD, or swipe on a phone. Space or P pauses the game.
 
-**[Play it here](https://art-brtohers-code.github.io/mycoolproject/)**
+Snake has a few modes and maps. Collect food, complete orders, and unlock hats. In Pac-Man, eat all the dots and avoid the ghosts. Scores and unlocked hats are saved in your browser.
+
+The page uses plain HTML, CSS, and JavaScript. The game graphics are drawn with basic canvas shapes.
+
+Open `index.html` in a browser to play locally. No install or build step is needed.
+
+Run the tests with `node --test tests/*.test.js`.
+
+[Play online](https://art-brtohers-code.github.io/mycoolproject/)
